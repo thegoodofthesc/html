@@ -1,77 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      background: #f3f3f3;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .box {
-      display: none;
-      background: white;
-      padding: 40px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .box.active { display: block; }
-    input, button {
-      display: block;
-      width: 250px;
-      padding: 10px;
-      margin: 10px 0;
-      font-size: 16px;
-    }
-    button {
-      background-color: #333;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #666;
-    }
-  </style>
+  <title>Minimal SPA</title>
 </head>
 <body>
-
-  <div class="box active" id="loginBox">
-    <h2>Login</h2>
-    <input id="username" placeholder="Username">
-    <input id="password" type="password" placeholder="Password">
-    <button onclick="login()">Login</button>
-  </div>
-
-  <div class="box" id="dashboardBox">
-    <h2>You're In!</h2>
-    <p>Welcome. Refresh the page to logout.</p>
-  </div>
-
-  <script>
-    function login() {
-      const user = document.getElementById('username').value;
-      const pass = document.getElementById('password').value;
-
-      fetch('/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: user, password: pass })
-      })
-      .then(res => res.json())
-      .then(data => {
-        if (data.success) {
-          document.getElementById('loginBox').classList.remove('active');
-          document.getElementById('dashboardBox').classList.add('active');
-        } else {
-          alert("Wrong credentials");
-        }
-      });
-    }
-  </script>
-
+  <div id="root"></div>
+  <script src="app.js"></script>
 </body>
 </html>
