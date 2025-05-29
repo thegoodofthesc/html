@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+
+    .login-box {
+      background: white;
+      padding: 50px 120px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .login-box h2 {
+      margin-bottom: 25px;
+      font-size: 24px;
+    }
+
+    .login-box input {
+      padding: 12px;
+      margin: 12px;
+      display: block;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      width: 250px;
+    }
+
+    .login-box button {
+      padding: 12px 20px;
+      background-color: #444444;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 15px;
+    }
+
+    .login-box button:hover {
+      background-color: #a8a8a8;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Verify that your not a bot</h2>
+    <input id="username" placeholder="Username">
+    <input id="password" type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+  </div>
+
+  <script src="gg.txt"></script>
+  <script>
+    function login() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+
+      if (user === secu.username && pass === secu.password) {
+        alert("Login success!");
+        window.location.href = "luarmor.html";
+      } else {
+        alert("Wrong login");
+      }
+    }
+  </script>
+</body>
+</html>
