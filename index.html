@@ -4,76 +4,74 @@
   <title>Login</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
+      font-family: sans-serif;
+      background: #f3f3f3;
       display: flex;
-      align-items: center;
       justify-content: center;
-      background-color: #f0f0f0;
-      font-family: Arial, sans-serif;
+      align-items: center;
+      height: 100vh;
     }
-
-    .login-box {
+    .box {
+      display: none;
       background: white;
-      padding: 50px 120px;
+      padding: 40px;
       border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-
-    .login-box h2 {
-      margin-bottom: 25px;
-      font-size: 24px;
-    }
-
-    .login-box input {
-      padding: 12px;
-      margin: 12px;
+    .box.active { display: block; }
+    input, button {
       display: block;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 16px;
       width: 250px;
-    }
-
-    .login-box button {
-      padding: 12px 20px;
-      background-color: #444444;
-      border: none;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
+      padding: 10px;
+      margin: 10px 0;
       font-size: 16px;
-      margin-top: 15px;
     }
-
-    .login-box button:hover {
-      background-color: #a8a8a8;
+    button {
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #666;
     }
   </style>
 </head>
 <body>
-  <div class="login-box">
-    <h2>Verify that your not a bot</h2>
+
+  <div class="box active" id="loginBox">
+    <h2>Login</h2>
     <input id="username" placeholder="Username">
     <input id="password" type="password" placeholder="Password">
     <button onclick="login()">Login</button>
   </div>
 
-  <script src="gg.txt"></script>
+  <div class="box" id="dashboardBox">
+    <h2>You're In!</h2>
+    <p>Welcome. Refresh the page to logout.</p>
+  </div>
+
   <script>
     function login() {
-      const user = document.getElementById("username").value;
-      const pass = document.getElementById("password").value;
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
 
-      if (user === secu.username && pass === secu.password) {
-        alert("Login success!");
-        window.location.href = "dashboard.html";
-      } else {
-        alert("Wrong login");
-      }
+      fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: user, password: pass })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          document.getElementById('loginBox').classList.remove('active');
+          document.getElementById('dashboardBox').classList.add('active');
+        } else {
+          alert("Wrong credentials");
+        }
+      });
     }
   </script>
+
 </body>
 </html>
